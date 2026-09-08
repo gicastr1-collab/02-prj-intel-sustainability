@@ -1,1 +1,238 @@
-/* Add your CSS here */
+* {
+  box-sizing: border-box; /* Padding and borders won't accidentally expand element widths */
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* 2. Turn the body into a Flexbox column layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 3. Let the header and section take up space normally, 
+      but push everything else if content is sparse */
+header, section {
+  flex-shrink: 0; 
+}
+
+/* 4. Tell the timeline section to expand and fill all empty space,
+      which successfully forces the footer to the absolute bottom */
+section {
+  flex: 0 0 auto; 
+}
+
+body {
+  /* Choosing clean, system-based modern sans-serif fonts for instant, clean loading */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff; /* Page background is standard white */
+  color: rgb(0, 15, 40);            /* Primary content text is standard black */
+  line-height: 1.6;          /* Adds comfortable space between lines of reading text */
+  padding-top: 0;
+  padding-bottom: 0rem;
+}
+
+/* ==========================================
+   2. HEADER & LOGO STYLING
+   ========================================== */
+header {
+  padding: 4rem 2rem 2rem 2rem;
+  max-width: auto;
+  margin: 0;            /* Centers the header container on very wide screens */
+  place-items: center;
+
+  background: linear-gradient(180deg,#000f28 0%, rgb(121, 118, 118) 100%);
+  padding: 100px;
+  text-align: center;     /* Ensure text inside elements is also centered */
+}
+
+footer {
+  padding: 4rem 2rem 2rem 2rem;
+  max-width: auto;
+  margin: 0 auto;            /* Centers the header container on very wide screens */
+  text-align: center;     /* Ensure text inside elements is also centered */
+  width: 100%;
+  color: black;           /* Optional: text color */
+  position: fixed;
+  bottom: 0;
+  flex: 1 0 0;
+  
+  
+}
+
+.logo-container img {
+  width: 100px; /* Adjust to your preferred width */
+  height: auto;  /* Maintains aspect ratio */
+  padding: 1rem  1rem ;
+}
+
+header h1 {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #fff;            
+  margin-bottom: 0.75rem;
+  
+}
+
+header p {
+  font-size: 1rem;
+  color: #fff;            
+  max-width: auto;
+  text-align: center
+
+}
+
+/* ==========================================
+   3. THE TIMELINE CONTAINER (FLEXBOX)
+   ========================================== */
+section {
+  display: flex;             /* Activates Flexbox container layouts */
+  width: 100%;
+  gap: 4rem;                 /* Creates equal, clean spacing between each division card */
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+  
+  /* DEFAULT FOR LARGE SCREENS: Lines up cards side-by-side in a horizontal row */
+  flex-direction: row;       
+  overflow-x: auto;          /* Spills extra cards into a scrollable horizontal line */
+  scroll-behavior: smooth;   
+  
+  /* SCROLL SNAPPING: Snaps the track directly into position when a user flicks or scrolls */
+  scroll-snap-type: x mandatory; 
+  -webkit-overflow-scrolling: touch; /* Fast, responsive mobile-momentum touch scrolling */
+}
+
+/* Clean up scrollbar aesthetics visually to match a modern interface layout */
+section::-webkit-scrollbar {
+  height: 24px;
+}
+section::-webkit-scrollbar-thumb {
+  background-color: #0068B5; /* Uses your requested primary accent theme */
+  border-radius: 5px;
+}
+
+/* ==========================================
+   4. THE MILESTONE CARD LAYOUT
+   ========================================== */
+/* Targets the immediate child 'div' containers directly inside your timeline 'section' */
+section > div {
+  /* 'flex: 0 0 360px' prevents elements shrinking or stretching beyond a base desktop card size */
+  flex: 0 0 360px; 
+  scroll-snap-align: none;  /* Directs the browser to lock this card frame onto the viewport edge */
+  
+  display: flex;
+  flex-direction: column;    /* Vertically builds content internally (Headings -> Image -> Details) */
+  gap: 1rem;
+  padding: 2rem;
+  border-left: 6px solid #00C7FD; /* Light blue accent marker line framing the card left border */
+  background-color: #00c6fd50;
+  cursor: pointer;
+
+  /* TRANSITIONS: Animates position, accent colors, and shadows over 0.4 seconds smoothly.
+     The 'cubic-bezier' setting creates a bouncy, premium spring-like effect on hover. */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              border-color 0.3s ease, 
+              box-shadow 0.4s ease;
+}
+
+/* INTERACTIVE CARD HOVER TRANSFORMATION */
+section > div:hover {
+  transform: translateY(-8px) scale(1.02); /* Seamlessly lifts and grows the layout */
+  border-left-color: #0068B5;               /* Transitions the accent highlight to dark blue */
+  box-shadow: 0 15px 35px rgba(0, 104, 181, 0.12); /* Applies elegant, soft atmospheric drop shadow */
+}
+
+/* ==========================================
+   5. IMAGE EFFECTS & HOVER TRANSITIONS
+   ========================================== */
+section > div img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;         /* Forces layout images to scale gracefully without compressing proportions */
+  border-radius: 4px;
+  filter: grayscale(50%);     /* Mutes the image color palette by default */
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+/* When the parent div card container is hovered, target the specific img inside it */
+section > div:hover img {
+  filter: grayscale(0%);     /* Restores vivid imagery colors beautifully on activation */
+  transform: scale(1.01);
+}
+
+/* ==========================================
+   6. METADATA LAYOUT (ONE LINE HEADINGS)
+   ========================================== */
+/* We target your h2 (dates) and h3 (milestones) text to force them cleanly onto a single line */
+section > div h2, 
+section > div h3 {
+  display: inline;           /* Causes headings to display block inline next to each other */
+  vertical-align: baseline;
+}
+
+section > div h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #000f28;            /* Highlights dates clearly using deep blue theme */
+  margin-right: 0.75rem;     /* Forces spacing separation between date and following milestone title text */
+}
+
+section > div h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* ==========================================
+   7. INTERACTIVE REVEAL MECHANISM
+   ========================================== */
+/* Study Note: You can't transition 'display: none'. Instead, we hide paragraphs by collapsing 
+   their 'max-height' and setting 'opacity' transparency values completely to zero. */
+section > div p {
+  font-size: 0.95rem;
+  color: #333333;
+  
+  max-height: 0;             /* Shrinks text space completely */
+  opacity: 0;                /* Fades opacity value out entirely */
+  overflow: hidden;          /* Locks hidden content out of boundary sights */
+  pointer-events: none;      /* Disables interaction with layout layers when collapsed */
+  
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+/* INTERACTIVE ACTIVATION STATE: Triggers paragraph reveal safely when container card is hovered */
+section > div:hover p {
+  max-height: 150px;         /* Expands element boundary safely to fit milestone paragraph heights */
+  opacity: 1;                /* Fades detail text beautifully back into readability range */
+  pointer-events: auto;
+  margin-top: 0.5rem;        /* Applies intentional separation spacing dynamically */
+}
+
+
+
+/* ==========================================
+   9. RESPONSIVE LAYOUT BREAKPOINTS (@media)
+   ========================================== */
+/* Runs when screen viewport widths compress smaller than 768px (like tablets and smartphones) */
+@media (max-width: 768px) {
+  section {
+    flex-direction: column;  /* Automatically shifts card stack behavior from horizontal to vertical verticality */
+    overflow-x: visible;     /* Disables horizontal scrollbars when viewing layouts vertically */
+    scroll-snap-type: none;  /* Turns snapping flags off so vertical system scrolling feels responsive */
+    padding: 1.5rem;
+  }
+
+  section > div {
+    flex: 1 1 auto;          /* Instructs elements to occupy full mobile structural layouts flexibly */
+    width: 100%;
+    scroll-snap-align: none;
+  }
+}
