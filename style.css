@@ -53,7 +53,7 @@ header {
 }
 
 footer {
-  padding: 4rem 2rem 2rem 2rem;
+  padding-top: 100px;
   max-width: auto;
   margin: 0 auto;            /* Centers the header container on very wide screens */
   text-align: center;     /* Ensure text inside elements is also centered */
@@ -61,8 +61,8 @@ footer {
   color: black;           /* Optional: text color */
   position: fixed;
   bottom: 0;
-  flex: 1 0 0;
-  
+  flex:  0;
+  font-size: 1rem;
   
 }
 
@@ -73,7 +73,7 @@ footer {
 }
 
 header h1 {
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: 600;
   color: #fff;            
   margin-bottom: 0.75rem;
@@ -112,7 +112,7 @@ section {
 
 /* Clean up scrollbar aesthetics visually to match a modern interface layout */
 section::-webkit-scrollbar {
-  height: 24px;
+  height: 12px;
 }
 section::-webkit-scrollbar-thumb {
   background-color: #0068B5; /* Uses your requested primary accent theme */
@@ -126,12 +126,12 @@ section::-webkit-scrollbar-thumb {
 section > div {
   /* 'flex: 0 0 360px' prevents elements shrinking or stretching beyond a base desktop card size */
   flex: 0 0 360px; 
-  scroll-snap-align: none;  /* Directs the browser to lock this card frame onto the viewport edge */
+  scroll-snap-align: end;  /* Directs the browser to lock this card frame onto the viewport edge */
   
   display: flex;
   flex-direction: column;    /* Vertically builds content internally (Headings -> Image -> Details) */
   gap: 1rem;
-  padding: 2rem;
+  padding: 50px;
   border-left: 6px solid #00C7FD; /* Light blue accent marker line framing the card left border */
   background-color: #00c6fd50;
   cursor: pointer;
@@ -231,7 +231,7 @@ section > div:hover p {
   }
 
   section > div {
-    flex: 1 1 auto;          /* Instructs elements to occupy full mobile structural layouts flexibly */
+    flex: 0;          /* Instructs elements to occupy full mobile structural layouts flexibly */
     width: 100%;
     scroll-snap-align: none;
   }
