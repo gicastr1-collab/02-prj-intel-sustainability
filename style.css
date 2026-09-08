@@ -73,18 +73,20 @@ footer {
 }
 
 header h1 {
-  font-size: 5rem;
+  font-size: clamp(1.8rem, 4vw, 3rem); 
   font-weight: 600;
   color: #fff;            
   margin-bottom: 0.75rem;
+  text-align: center;
+  max-width: auto;
   
 }
 
 header p {
-  font-size: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: #fff;            
   max-width: auto;
-  text-align: center
+  text-align: center;
 
 }
 
