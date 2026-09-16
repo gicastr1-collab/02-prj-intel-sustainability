@@ -9,6 +9,14 @@ html, body {
   margin: 0;
 }
 
+html.rtl {
+  direction: rtl;
+}
+
+html.rtl body {
+  text-align: right;
+}
+
 /* 2. Turn the body into a Flexbox column layout */
 body {
   display: flex;
@@ -42,7 +50,7 @@ body {
    2. HEADER & LOGO STYLING
    ========================================== */
 header {
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   max-width: auto;
   margin: 0;            /* Centers the header container on very wide screens */
   place-items: center;
@@ -52,24 +60,43 @@ header {
   text-align: center;     /* Ensure text inside elements is also centered */
 }
 
-footer {
-  padding-top: 100px;
-  max-width: auto;
-  margin: 0 auto;            /* Centers the header container on very wide screens */
-  text-align: center;     /* Ensure text inside elements is also centered */
-  width: 100%;
-  color: black;           /* Optional: text color */
-  position: fixed;
-  bottom: 0;
-  flex:  0;
-  font-size: 1rem;
-  
+
+
+/* --- Default / Mobile View --- */
+/* Hide the desktop footer on small screens */
+.footer-desktop {
+  display: none;
+  justify-content: center;
+}
+
+/* Style your mobile footer here */
+.footer-mobile {
+  display: block; 
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+
+/* --- Desktop View (Screens 768px and wider) --- */
+@media screen and (min-width: 768px) {
+  /* Hide the mobile footer on larger screens */
+  .footer-mobile {
+    display: none;
+  }
+
+  /* Show and style the desktop footer */
+  .footer-desktop {
+    display: flex; /* Or 'block', 'grid', depending on layout */
+    justify-content: space-between;
+    padding: 2rem;
+  }
 }
 
 .logo-container img {
   width: 100px; /* Adjust to your preferred width */
   height: auto;  /* Maintains aspect ratio */
-  padding: 1rem  1rem ;
+  padding: 1rem ;
 }
 
 header h1 {
@@ -135,7 +162,7 @@ section > div {
   gap: 1rem;
   padding: 50px;
   border-left: 6px solid #00C7FD; /* Light blue accent marker line framing the card left border */
-  background-color: #00c6fd50;
+  background-color: #68686842;
   cursor: pointer;
 
   /* TRANSITIONS: Animates position, accent colors, and shadows over 0.4 seconds smoothly.
@@ -188,7 +215,7 @@ section > div h2 {
 }
 
 section > div h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #000000;
 }
@@ -212,10 +239,10 @@ section > div p {
 
 /* INTERACTIVE ACTIVATION STATE: Triggers paragraph reveal safely when container card is hovered */
 section > div:hover p {
-  max-height: 150px;         /* Expands element boundary safely to fit milestone paragraph heights */
+  max-height: 200px;         /* Expands element boundary safely to fit milestone paragraph heights */
   opacity: 1;                /* Fades detail text beautifully back into readability range */
   pointer-events: auto;
-  margin-top: 0.5rem;        /* Applies intentional separation spacing dynamically */
+  margin-top: auto;        /* Applies intentional separation spacing dynamically */
 }
 
 
